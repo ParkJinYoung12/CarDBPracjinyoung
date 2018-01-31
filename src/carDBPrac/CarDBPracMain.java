@@ -17,26 +17,28 @@ public class CarDBPracMain {
 		System.out.println("4.자동차 정보 삭제");
 		System.out.println("===========================");
 		int inputNum= sc.nextInt();
-		if(inputNum==1) {
+		if(inputNum==1) { //자동차 정보 조회
 			
 			break;
 		}
-		else if(inputNum==2) {
+		else if(inputNum==2) { //자동차 정보 입력
 			
 			break;
 		}
-		else if(inputNum==3) {
+		else if(inputNum==3) { //자동차 정보 수정 
 			
 			break;
 		}
-		else if(inputNum==4) {
+		else if(inputNum==4) { // 자동차 정보 삭제 
 			
 			break;
-		}else {
+		}else {				//다른거 입력했을때 다시입력 
 			System.out.println("다시입력해주세요");
 		}
 		}//end while
+		System.out.println("종료");
 		
+		sc.close();
 		
 		
 	} //end main method
