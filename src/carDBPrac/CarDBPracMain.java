@@ -26,6 +26,10 @@ public class CarDBPracMain {
 				CarInfo ci = list.get(i);
 				System.out.println(ci.getCiMaker());
 			}
+			//상세정보 보기 선택해야겠지?
+			
+			
+			
 			break;
 		}
 		else if(inputNum==2) { //자동차 정보 입력
