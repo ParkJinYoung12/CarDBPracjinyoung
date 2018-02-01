@@ -23,24 +23,21 @@ public class CarDBPracMain {
 			ArrayList<CarInfo> list = dao.getCarInfoList();
 			
 			//조회한 데이터 뿌리기
-			System.out.println("번호	이름	메이커	가격	컬러	너비	높이");
+			System.out.println("번호	이름	메이커 	가격");
 			for (int i = 0; i < list.size(); i++) {
 				CarInfo ci = list.get(i);
 				
 				System.out.print(ci.getCiNum()+"	");
 				System.out.print(ci.getCiName()+"	");
 				System.out.print(ci.getCiMaker()+"	");
-				System.out.print(ci.getCiPrice()+"	");
-				System.out.print(ci.getCiColor()+"	");
-				System.out.print(ci.getCiWidth()+"	");
-				System.out.println(ci.getCiHight()+"	");
+				System.out.println(ci.getCiPrice()+"	");
+				
 				
 			}
 			//자동차 상세 정보 보기 상세보기할 정보가 없으면 잘못입력하셨습니다
 			while(true) {
-				System.out.println("상세보기할 번호를 입력하세요");
-				int selectNum=sc.nextInt();
-								
+				System.out.println("상세보기할 번호를 입력하세요 0번은 종료입니다~~");
+				int selectNum=sc.nextInt();							
 				for (int i = 0; i < list.size(); i++) {
 					//사용자가 선택한 번호와 list cinum 과 일치할때
 					if(selectNum==list.get(i).getCiNum()) {
@@ -48,7 +45,10 @@ public class CarDBPracMain {
 						System.out.println("잘입력했네요");
 						System.out.println("입력한 번호 : "+selectNum);
 						//상세정보를 보여준다 .
-						
+							CarDetail cd = dao.getCarDetailInfo(selectNum);
+							System.out.println("번호	이름	메이커	가격	컬러	너비	높이");
+							System.out.println(cd.toString());
+							
 						count=list.get(i).getCiNum(); // 잘못된 번호 이면 count에 값이 저장되지않는다 . 
 						break;
 					}
