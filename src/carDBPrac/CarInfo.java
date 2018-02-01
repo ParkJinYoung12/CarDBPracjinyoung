@@ -5,8 +5,28 @@ public class CarInfo {
 	private String ciName;
 	private String ciMaker;
 	private int ciPrice;
+	private String ciColor;
+	private int ciWidth;
+	private int ciHight;
 	
-	
+	protected String getCiColor() {
+		return ciColor;
+	}
+	protected void setCiColor(String ciColor) {
+		this.ciColor = ciColor;
+	}
+	protected int getCiWidth() {
+		return ciWidth;
+	}
+	protected void setCiWidth(int ciWidth) {
+		this.ciWidth = ciWidth;
+	}
+	protected int getCiHight() {
+		return ciHight;
+	}
+	protected void setCiHight(int ciHight) {
+		this.ciHight = ciHight;
+	}
 	protected int getCiNum() {
 		return ciNum;
 	}

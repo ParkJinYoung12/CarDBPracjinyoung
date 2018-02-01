@@ -40,7 +40,10 @@ public class CarInfoDAO {
 				cInfo.setCiNum(rs.getInt(1));
 				cInfo.setCiName(rs.getString(2));
 				cInfo.setCiMaker(rs.getString(3));
-				cInfo.setCiPrice(rs.getInt(4));				
+				cInfo.setCiPrice(rs.getInt(4));	
+				cInfo.setCiColor(rs.getString(5));
+				cInfo.setCiWidth(rs.getInt(6));
+				cInfo.setCiHight(rs.getInt(7));
 				list.add(cInfo);
 				
 			}
