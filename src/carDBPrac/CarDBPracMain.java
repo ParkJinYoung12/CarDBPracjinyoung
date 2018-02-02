@@ -133,11 +133,15 @@ public class CarDBPracMain {
 				// 조회한 데이터 뿌리기
 				System.out.println("번호	이름	메이커 	가격");
 				for (int i = 0; i < list.size(); i++) {
-					CarDetail ci = list.get(i);				
+					CarDetail ci  = list.get(i);				
 					System.out.println(ci.toString());
 				}
 				System.out.println("선택번호:해당 내용삭제 0:종료");
-				
+				int select = sc.nextInt();
+				if(isValidNum(select,list)){			
+				//db에 접근해서 사용자가 입력받은 데이터 INSERT 시키기 				
+				dao.deleteCarDetail(select); //인서트가 아니라 업데이트 
+				System.out.println("삭제완료");
 				
 				
 				break;
@@ -148,7 +152,8 @@ public class CarDBPracMain {
 		} // end while
 		System.out.println("종료");
 
-		sc.close();
+		sc.close();}
+		
 
 	} // end main method
     //db 에 접근해서 사용자가 입력한 번호가 일치하는지 검사
