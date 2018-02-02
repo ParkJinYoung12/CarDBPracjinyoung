@@ -1,6 +1,7 @@
 package carDBPrac;
 
 public class CarDetail {
+	CarDetail(){};
 	private int ciNum;
 	private String ciName;
 	private String ciMaker;
@@ -8,6 +9,14 @@ public class CarDetail {
 	private String ciColor;
 	private int ciWidth;
 	private int ciHight;
+	public CarDetail(String cName, String cMaker, int cPrice, String cColor, int cWidth, int cHight) {
+		this.ciName=cName;
+		this.ciMaker=cMaker;
+		this.ciPrice=cPrice;
+		this.ciColor=cColor;
+		this.ciWidth=cWidth;
+		this.ciHight=cHight;
+	}
 	protected int getCiNum() {
 		return ciNum;
 	}

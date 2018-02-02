@@ -51,6 +51,9 @@ public class CarInfo {
 	protected void setCiPrice(int ciPrice) {
 		this.ciPrice = ciPrice;
 	}
-	
+	public String toString() {
+		return ciNum+"	"+ciName+'	'+ciMaker+'	'+ciPrice+'	';
+		
+	}
 	
 }
