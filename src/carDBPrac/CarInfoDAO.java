@@ -137,24 +137,13 @@ public class CarInfoDAO {
 	}//method end
 
 
-
-
-
-
-
-
-
-
-
-
-
 	public void insertCarDetail(CarDetail carDetailData)throws Exception {
 		
 		try {
 			//dbms 접속정보 읽어오기
 			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
 			//1.sql문을 String으로 준비
-			String sql = "insert into carInfo (ciNum,ciName,ciMaker,ciPrice,CICOLOR,CIWIDTH,CIHEIGHT) values (seq_carInfo_ciNum.nextval,?,?,?,?,?,?)"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			String sql = "insert into heroInfo (ciNum,ciName,ciMaker,ciPrice,CICOLOR,CIWIDTH,CIHEIGHT) values (seq_carInfo_ciNum.nextval,?,?,?,?,?,?)"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, carDetailData.getCiName());

@@ -128,11 +128,23 @@ public class CarDBPracMain {
 				
 				
 			} else if (inputNum == 4) { // 자동차 정보 삭제
+				ArrayList<CarDetail> list = dao.getCarDetailInfoList();
 
+				// 조회한 데이터 뿌리기
+				System.out.println("번호	이름	메이커 	가격");
+				for (int i = 0; i < list.size(); i++) {
+					CarDetail ci = list.get(i);				
+					System.out.println(ci.toString());
+				}
+				System.out.println("선택번호:해당 내용삭제 0:종료");
+				
+				
+				
 				break;
-			} else { // 다른거 입력했을때 다시입력
+			} //4번일때 끝
+			else { // 다른거 입력했을때 다시입력
 				System.out.println("다시입력해주세요");
-			}
+			} 
 		} // end while
 		System.out.println("종료");
 
