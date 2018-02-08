@@ -23,7 +23,7 @@ public class CarDBPracMain {
 			int inputNum = sc.nextInt();
 			if (inputNum == 1) { // 자동차 정보 조회
 				ArrayList<CarInfo> list = dao.getCarInfoList();
-
+				
 				// 조회한 데이터 뿌리기
 				System.out.println("번호	이름	메이커 	가격");
 				for (int i = 0; i < list.size(); i++) {
@@ -66,23 +66,41 @@ public class CarDBPracMain {
 			else if (inputNum == 2) { // 자동차 정보 입력
 				/* 자동차 정보 조회 그대로 구현 */
 				ArrayList<CarDetail> list = dao.getCarDetailInfoList();
-
 				// 조회한 데이터 뿌리기
-				System.out.println("번호	이름	메이커 	가격");
+				System.out.println("번호	이름	메이커 	가격	색상	너비	높이");
 				for (int i = 0; i < list.size(); i++) {
 					CarDetail ci = list.get(i);				
 					System.out.println(ci.toString());
 				}
-				//				
+				//
 				
 				System.out.println("(1:새 data입력)(2:종료)");
 				int selectNum = sc.nextInt();
 				if(selectNum==1) {
+					CarInfoDAO a =new CarInfoDAO();
+					ArrayList<CiMarkerInfo> cm=new ArrayList<>();
+					
+					cm =a.showmaker();
+					
 					//새로 사용자가 입력받는 데이터들..
 					System.out.println("차명을 입력하세요:");String cName=scStr.nextLine();
-					System.out.println("제조사를 입력하세요:");String cMaker=scStr.nextLine();
+					System.out.println("제조사를 입력하세요(번호를 고르시면됩니다.):");
+					for (int i = 0; i < cm.size(); i++) {
+						System.out.println(cm.get(i).getMnum()+"	"+cm.get(i).getMnameKor()+"	"+cm.get(i).getMnameEng());
+						
+					}
+					int cMaker=scStr.nextInt();
+					
 					System.out.println("가격을 입력하세요:");int cPrice=sc.nextInt();
-					System.out.println("색상을 입력하세요:");String cColor=scStr.nextLine();
+					System.out.println("색상을 입력하세요:");
+					ArrayList<CiColorsInfo> cm2=new ArrayList<>();
+					cm2=a.showcolor();
+					for (int i = 0; i < cm2.size(); i++) {
+						System.out.println(cm2.get(i).getCnum()+"	"+cm2.get(i).getCname()+"	"+cm2.get(i).getCnameEng()+
+								" "+cm2.get(i).getCRgb());
+						
+					}
+					int cColor=scStr.nextInt();
 					System.out.println("너비를 입력하세요:");int cWidth=sc.nextInt();
 					System.out.println("높이를 입력하세요:");int cHight=sc.nextInt();
 					CarDetail carDetailData = new CarDetail(cName,cMaker,cPrice,cColor,cWidth,cHight);
@@ -110,9 +128,27 @@ public class CarDBPracMain {
 				if(isValidNum(select,list)){
 				System.out.println(dao.getCarDetailInfo(select));
 				System.out.println("차명을 입력하세요:");String cName=scStr.nextLine();
-				System.out.println("제조사를 입력하세요:");String cMaker=scStr.nextLine();
+				System.out.println("제조사를 입력하세요:");
+				CarInfoDAO a = new CarInfoDAO();
+				ArrayList<CiMarkerInfo> cm=new ArrayList<>();
+				cm=a.showmaker();
+				for (int i = 0; i < cm.size(); i++) {
+					System.out.println(cm.get(i).getMnum()+"	"+cm.get(i).getMnameKor()+"	"+cm.get(i).getMnameEng());
+					
+				}
+				int cMaker=scStr.nextInt();
 				System.out.println("가격을 입력하세요:");int cPrice=sc.nextInt();
-				System.out.println("색상을 입력하세요:");String cColor=scStr.nextLine();
+				System.out.println("색상을 입력하세요:");
+				
+				ArrayList<CiColorsInfo> cm2=new ArrayList<>();
+				cm2=a.showcolor();
+				for (int i = 0; i < cm2.size(); i++) {
+					System.out.println(cm2.get(i).getCnum()+"	"+cm2.get(i).getCname()+"	"+cm2.get(i).getCnameEng()+
+							" "+cm2.get(i).getCRgb());
+					
+				}
+				
+				int cColor=scStr.nextInt();
 				System.out.println("너비를 입력하세요:");int cWidth=sc.nextInt();
 				System.out.println("높이를 입력하세요:");int cHight=sc.nextInt();
 				CarDetail carDetailData = new CarDetail(cName,cMaker,cPrice,cColor,cWidth,cHight);

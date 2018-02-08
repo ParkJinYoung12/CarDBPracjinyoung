@@ -9,11 +9,27 @@ public class CarDetail {
 	private String ciColor;
 	private int ciWidth;
 	private int ciHight;
-	public CarDetail(String cName, String cMaker, int cPrice, String cColor, int cWidth, int cHight) {
+	private int makers;
+	private int colors;
+	protected int getMakers() {
+		
+		return makers;
+		
+	}
+	protected void setMakers(int makers) {
+		this.makers = makers;
+	}
+	protected int getColors() {
+		return colors;
+	}
+	protected void setColors(int colors) {
+		this.colors = colors;
+	}
+	public CarDetail(String cName, int cMaker, int cPrice, int cColor, int cWidth, int cHight) {
 		this.ciName=cName;
-		this.ciMaker=cMaker;
+		this.makers=cMaker;
 		this.ciPrice=cPrice;
-		this.ciColor=cColor;
+		this.colors=cColor;
 		this.ciWidth=cWidth;
 		this.ciHight=cHight;
 	}

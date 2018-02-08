@@ -28,7 +28,12 @@ public class CarInfoDAO {
 			//dbms 접속정보 읽어오기
 			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
 			//1.sql문을 String으로 준비
-			String sql = " select * from carInfo"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			String sql = "select i.ciNum, \r\n" + 
+					"		i.ciName, \r\n" + 
+					"		m.mNameKor,\r\n" + 
+					"		i.ciPrice	\r\n" + 
+					" from carInfo i, carMakers m\r\n" + 
+					"where i.ciMaker = m.mNum"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			//3.실행 결과를 ResultSet 객체에 담는다.
@@ -66,7 +71,16 @@ public class CarInfoDAO {
 			//dbms 접속정보 읽어오기
 			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
 			//1.sql문을 String으로 준비
-			String sql = "select * from carInfo where cinum=?"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			String sql = "select i.ciNum, \r\n" + 
+					"		i.ciName, \r\n" + 
+					"		m.mNameKor,\r\n" + 
+					"		i.ciPrice, \r\n" + 
+					"		c.cname,\r\n" + 
+					"		i.ciWidth, \r\n" + 
+					"		i.ciHeight\r\n" + 
+					" from carInfo i, carMakers m, colors c\r\n" + 
+					"where i.ciMaker = m.mNum\r\n" + 
+					"and i.ciColor = c.cNum and i.CINUM=?"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,selectNum); // 첫번째 물음표 쿼리에 대한 세팅값
@@ -104,7 +118,16 @@ public class CarInfoDAO {
 			//dbms 접속정보 읽어오기
 			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
 			//1.sql문을 String으로 준비
-			String sql = " select * from carInfo"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			String sql = "select i.ciNum, \r\n" + 
+					"		i.ciName, \r\n" + 
+					"		m.mNameKor,\r\n" + 
+					"		i.ciPrice, \r\n" + 
+					"		c.cname,\r\n" + 
+					"		i.ciWidth, \r\n" + 
+					"		i.ciHeight\r\n" + 
+					" from carInfo i, carMakers m, colors c\r\n" + 
+					"where i.ciMaker = m.mNum\r\n" + 
+					"and i.ciColor = c.cNum"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			//3.실행 결과를 ResultSet 객체에 담는다.
@@ -143,13 +166,13 @@ public class CarInfoDAO {
 			//dbms 접속정보 읽어오기
 			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
 			//1.sql문을 String으로 준비
-			String sql = "insert into heroInfo (ciNum,ciName,ciMaker,ciPrice,CICOLOR,CIWIDTH,CIHEIGHT) values (seq_carInfo_ciNum.nextval,?,?,?,?,?,?)"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			String sql = "insert into carinfo (ciNum,ciName,ciMaker,ciPrice,CICOLOR,CIWIDTH,CIHEIGHT) values (seq_carInfo_ciNum.nextval,?,?,?,?,?,?)"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, carDetailData.getCiName());
-			pstmt.setString(2, carDetailData.getCiMaker());
+			pstmt.setInt(2, carDetailData.getMakers());
 			pstmt.setInt(3, carDetailData.getCiPrice());
-			pstmt.setString(4,carDetailData.getCiColor());
+			pstmt.setInt(4,carDetailData.getColors());
 			pstmt.setInt(5, carDetailData.getCiWidth());
 			pstmt.setInt(6, carDetailData.getCiHight());
 		 // 첫번째 물음표 쿼리에 대한 세팅값
@@ -232,10 +255,76 @@ public class CarInfoDAO {
 		
 		
 	}
+	//메이커 종류를 불러옴 
+	public ArrayList<CiMarkerInfo> showmaker()throws Exception {
+		ArrayList<CiMarkerInfo> list = new ArrayList<>();
+		try {
+			//dbms 접속정보 읽어오기
+			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
+			//1.sql문을 String으로 준비
+			String sql = "select * from carMakers"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			//2.쿼리 실행 준비
+			pstmt = conn.prepareStatement(sql);
+			//3.실행 결과를 ResultSet 객체에 담는다.
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CiMarkerInfo cInfo=new CiMarkerInfo();
+				cInfo.setMnum(rs.getInt(1));
+				cInfo.setMnameKor(rs.getString(2));
+				cInfo.setMnameEng(rs.getString(3));
+				
+				
+				list.add(cInfo);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+			pstmt.close();
+			rs.close();
+		}
+		return list;
+		}
 	
-	
-	
-	
+	//컬러 종류를 불러옴 
+	public ArrayList<CiColorsInfo> showcolor()throws Exception {
+		ArrayList<CiColorsInfo> list = new ArrayList<>();
+		try {
+			//dbms 접속정보 읽어오기
+			conn=DriverManager.getConnection(ORACLE_URL,ORACLE_USER_ID,ORACLE_USER_PW);
+			//1.sql문을 String으로 준비
+			String sql = "select * from colors"; //리터럴에 ; 이게(세미콜론) 들어가면 안된다 
+			//2.쿼리 실행 준비
+			pstmt = conn.prepareStatement(sql);
+			//3.실행 결과를 ResultSet 객체에 담는다.
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				CiColorsInfo cInfo=new CiColorsInfo();
+				cInfo.setCnum(rs.getInt(1));
+				cInfo.setCname(rs.getString(2));
+				cInfo.setCnameEng(rs.getString(3));
+				cInfo.setCRgb(rs.getString(4));
+				
+				
+				list.add(cInfo);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+			pstmt.close();
+			rs.close();
+		}
+		return list;
+		}
 	
 	
 	
