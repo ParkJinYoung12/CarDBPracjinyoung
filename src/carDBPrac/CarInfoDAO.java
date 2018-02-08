@@ -204,9 +204,9 @@ public class CarInfoDAO {
 			//2.쿼리 실행 준비
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, carDetailData.getCiName());
-			pstmt.setString(2, carDetailData.getCiMaker());
+			pstmt.setInt(2, carDetailData.getMakers());
 			pstmt.setInt(3, carDetailData.getCiPrice());
-			pstmt.setString(4,carDetailData.getCiColor());
+			pstmt.setInt(4,carDetailData.getColors());
 			pstmt.setInt(5, carDetailData.getCiWidth());
 			pstmt.setInt(6, carDetailData.getCiHight());
 			pstmt.setInt(7,selectNum);

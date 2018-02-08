@@ -146,6 +146,7 @@ public class CarDBPracMain {
 					System.out.println(cm2.get(i).getCnum()+"	"+cm2.get(i).getCname()+"	"+cm2.get(i).getCnameEng()+
 							" "+cm2.get(i).getCRgb());
 					
+					
 				}
 				
 				int cColor=scStr.nextInt();
